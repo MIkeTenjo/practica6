@@ -44,7 +44,9 @@ public class MainFilaVirtual {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split("_");
-                //Usuario.Nivel nivel = Usuario.Nivel.valueOf(partes[1].toUpperCase());
+                //Usuario.Nivel nivel = Usuario.Nivel.valueOf(partes[1].toUpperCase()); 
+                //Se debe cambiar partes[1].toUpperCase = nivel, pero quiero que me lance un error
+                //Para saber que lo que falla es el código pero me sale el error de Usuario$Nivel
                 usuarios[cont] = new Usuario(partes[0], partes[1].toUpperCase(), Integer.parseInt(partes[2]));
                 cont++;
             }
