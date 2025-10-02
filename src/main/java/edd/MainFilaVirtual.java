@@ -38,7 +38,21 @@ public class MainFilaVirtual {
      * @return arreglo de usuarios cargados
      */
     public static Usuario[] cargarUsuariosDesdeArchivo(String rutaArchivo, int maxUsuarios) {
-        /*Aquí va tu código*/
+        Usuario[] usuarios  = new Usuario[maxUsuarios];
+        int cont = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] partes = linea.split("_");
+                //Usuario.Nivel nivel = Usuario.Nivel.valueOf(partes[1].toUpperCase());
+                usuarios[cont] = new Usuario(partes[0], partes[1].toUpperCase(), Integer.parseInt(partes[2]));
+                cont++;
+            }
+        } catch (IOException e) {
+            System.out.println("Error leyendo archivo: " + e.getMessage());
+        }
+
+        return usuarios;
     }
 
     public static void main(String[] args) {
@@ -46,9 +60,15 @@ public class MainFilaVirtual {
         int totalUsuarios = contarUsuarios(rutaArchivo);
 
         // 1. Crear evento con cupo limitado
-
+        Evento evento = new Evento(CAPACIDAD_EVENTO);
         // 2. Cargar usuarios
-
+        Usuario[] usuarios = cargarUsuariosDesdeArchivo(rutaArchivo, totalUsuarios);
         // 3. RESUELVE
+        OrdenamientosCuadraticos.ordenar(1, usuarios);
+        for (int i = 0; i < usuarios.length; i++) {
+            evento.agregarUsuario(usuarios[i]);
+        }
+
+        OrdenamientosCuadraticos.imprimeArreglo(evento.getUsuariosAceptados());
     }
 }
