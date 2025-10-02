@@ -6,11 +6,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>edd</groupId>
-  <artifactId>practica6</artifactId>
+  <artifactId>Practica6</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>practica6</name>
+  <name>Práctica 6</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +20,6 @@
 
   <build>
     <plugins>
-      <!-- Plugin para compilar -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -31,30 +30,50 @@
         </configuration>
       </plugin>
 
-      <!-- Plugin para crear jar ejecutable -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>3.3.0</version>
-        <configuration>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-          <archive>
-            <manifest>
-              <!-- Main sin paquete -->
-              <mainClass>MainFilaVirtual</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
         <executions>
+          
           <execution>
-            <id>make-assembly</id>
+            <id>fila-virtual-jar</id>
             <phase>package</phase>
             <goals>
               <goal>single</goal>
             </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <finalName>practica6-fila-virtual</finalName>
+              <archive>
+                <manifest>
+                  <mainClass>MainFilaVirtual</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
           </execution>
+
+          <execution>
+            <id>ords-cuadraticos-jar</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>jar-with-dependencies</descriptorRef>
+              </descriptorRefs>
+              <finalName>practica6-ordenamientos-cuadraticos</finalName>
+              <archive>
+                <manifest>
+                  <mainClass>MainOrdsCuadraticos</mainClass>
+                </manifest>
+              </archive>
+            </configuration>
+          </execution>
+
         </executions>
       </plugin>
     </plugins>
